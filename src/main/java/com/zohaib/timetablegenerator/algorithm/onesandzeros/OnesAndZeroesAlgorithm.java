@@ -19,7 +19,7 @@ public class OnesAndZeroesAlgorithm implements BaseGeneticAlgorithm {
         
 
         //Initialize population
-        population.initializePopulation(10);
+        population.initializePopulation(400);
 
         //Calculate fitness of each individual
         population.calculateFitness();
@@ -27,7 +27,7 @@ public class OnesAndZeroesAlgorithm implements BaseGeneticAlgorithm {
         System.out.println("Generation: " + generationCount + " Fittest: " + population.fittest);
 
         //While population gets an individual with maximum fitness
-        while (population.fittest < 9) {
+        while (population.fittest < 499) {
             ++generationCount;
 
             //Do selection
@@ -37,7 +37,7 @@ public class OnesAndZeroesAlgorithm implements BaseGeneticAlgorithm {
             crossover();
 
             //Do mutation under a random probability
-            if (rn.nextInt()%7 < 5) {
+            if (rn.nextInt()%10 < 2) {
                 mutation();
             }
 
@@ -53,7 +53,7 @@ public class OnesAndZeroesAlgorithm implements BaseGeneticAlgorithm {
         System.out.println("\nSolution found in generation " + generationCount);
         System.out.println("Fitness: "+population.getFittest().fitness);
         System.out.print("Genes: ");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 500; i++) {
             System.out.print(population.getFittest().genes[i]);
         }
 

@@ -8,7 +8,7 @@ public class Data {
 	List<Slot> slots;
 	List<Room> rooms;
 	List<Teacher> teachers;
-	List<StudentGroup> studentGroup;
+	List<StudentGroup> studentGroups;
 	
 	
 	public List<Course> getCourses() {
@@ -35,11 +35,11 @@ public class Data {
 	public void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
-	public List<StudentGroup> getStudentGroup() {
-		return studentGroup;
+	public List<StudentGroup> getStudentGroups() {
+		return studentGroups;
 	}
-	public void setStudentGroup(List<StudentGroup> studentGroup) {
-		this.studentGroup = studentGroup;
+	public void setStudentGroups(List<StudentGroup> studentGroups) {
+		this.studentGroups = studentGroups;
 	}
 	
 	

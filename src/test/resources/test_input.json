@@ -41,7 +41,7 @@
 			"code": "C1",
 			"name": "Maths",
 			"teacher": "T1",
-			"student_group": [
+			"studentGroups": [
 				"S1",
 				"S2"
 			]
@@ -50,7 +50,7 @@
 			"code": "C2",
 			"name": "Programming",
 			"teacher": "T2",
-			"student_group": [
+			"studentGroups": [
 				"S1",
 				"S2"
 			]
@@ -59,13 +59,13 @@
 			"code": "C3",
 			"name": "English",
 			"teacher": "T3",
-			"student_group": [
+			"studentGroups": [
 				"S1",
 				"S2"
 			]
 		}
 	],
-	"student_groups": [
+	"studentGroups": [
 		{
 			"code": "S1",
 			"name": "Spring 2020"

@@ -10,10 +10,10 @@ public class BasicIndividual {
     String[][] genes;
 
     
-    public BasicIndividual(int numberOfSlots, int numberOfRooms, Data data) {
+    public BasicIndividual(Data data) {
     	
     	Random rn = new Random();
-    	genes = new String[numberOfSlots][numberOfRooms];
+    	genes = new String[data.getSlots().size()][data.getRooms().size()];
     	
     	int numberOfCourses = data.getCourses().size();
     	
@@ -31,7 +31,31 @@ public class BasicIndividual {
 
 
 
-    //Calculate fitness
+    public int getFitness() {
+		return fitness;
+	}
+
+
+
+	public void setFitness(int fitness) {
+		this.fitness = fitness;
+	}
+
+
+
+	public String[][] getGenes() {
+		return genes;
+	}
+
+
+
+	public void setGenes(String[][] genes) {
+		this.genes = genes;
+	}
+
+
+
+	//Calculate fitness
     public void calcFitness() {
 
         fitness = 0;
