@@ -1,0 +1,92 @@
+{
+	"slots": [
+		{
+			"code": "H1",
+			"day": "Monday",
+			"time": "09:00"
+		},
+		{
+			"code": "H2",
+			"day": "Monday",
+			"time": "10:00"
+		},
+		{
+			"code": "H3",
+			"day": "Monday",
+			"time": "11:00"
+		},
+		{
+			"code": "H4",
+			"day": "Monday",
+			"time": "12:00"
+		},
+		{
+			"code": "H5",
+			"day": "Monday",
+			"time": "13:00"
+		}
+	],
+	"rooms": [
+		{
+			"code": "R1",
+			"name": "R1"
+		},
+		{
+			"code": "R2",
+			"name": "R2"
+		}
+	],
+	"courses": [
+		{
+			"code": "C1",
+			"name": "Maths",
+			"teacher": "T1",
+			"student_group": [
+				"S1",
+				"S2"
+			]
+		},
+		{
+			"code": "C2",
+			"name": "Programming",
+			"teacher": "T2",
+			"student_group": [
+				"S1",
+				"S2"
+			]
+		},
+		{
+			"code": "C3",
+			"name": "English",
+			"teacher": "T3",
+			"student_group": [
+				"S1",
+				"S2"
+			]
+		}
+	],
+	"student_groups": [
+		{
+			"code": "S1",
+			"name": "Spring 2020"
+		},
+		{
+			"code": "S2",
+			"name": "Fall 2020"
+		}
+	],
+	"teachers": [
+		{
+			"code": "T1",
+			"name": "John"
+		},
+		{
+			"code": "T2",
+			"name": "Jane"
+		},
+		{
+			"code": "T3",
+			"name": "Spock"
+		}
+	]
+}

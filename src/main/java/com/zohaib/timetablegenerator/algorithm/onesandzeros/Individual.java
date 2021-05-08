@@ -1,11 +1,12 @@
-package com.zohaib.timetablegenerator.algorithm;
+package com.zohaib.timetablegenerator.algorithm.onesandzeros;
 
 import java.util.Random;
 
 public class Individual {
 	int fitness = 0;
-    int[] genes = new int[5];
-    int geneLength = 5;
+    int geneLength = 10;
+    int[] genes = new int[geneLength];
+
 
     public Individual() {
         Random rn = new Random();
@@ -22,8 +23,8 @@ public class Individual {
     public void calcFitness() {
 
         fitness = 0;
-        for (int i = 0; i < 5; i++) {
-            if (genes[i] == 1) {
+        for (int i = 0; i < geneLength-1; i++) {
+            if (genes[i] != genes[i+1]) {
                 ++fitness;
             }
         }

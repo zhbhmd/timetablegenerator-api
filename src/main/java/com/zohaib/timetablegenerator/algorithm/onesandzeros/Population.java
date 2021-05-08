@@ -1,4 +1,4 @@
-package com.zohaib.timetablegenerator.algorithm;
+package com.zohaib.timetablegenerator.algorithm.onesandzeros;
 
 public class Population {
 	int popSize = 10;

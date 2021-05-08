@@ -1,16 +1,19 @@
-package com.zohaib.timetablegenerator.algorithm;
+package com.zohaib.timetablegenerator.algorithm.onesandzeros;
 
 import java.util.Random;
 
+import com.zohaib.timetablegenerator.algorithm.BaseGeneticAlgorithm;
 
-public class GeneticAlgorithm {
+
+public class OnesAndZeroesAlgorithm implements BaseGeneticAlgorithm {
 	
     Population population = new Population();
     Individual fittest;
     Individual secondFittest;
     int generationCount = 0;
     
-    void run(){
+    @Override
+    public void run(){
         Random rn = new Random();
 
         
@@ -24,7 +27,7 @@ public class GeneticAlgorithm {
         System.out.println("Generation: " + generationCount + " Fittest: " + population.fittest);
 
         //While population gets an individual with maximum fitness
-        while (population.fittest < 5) {
+        while (population.fittest < 9) {
             ++generationCount;
 
             //Do selection
@@ -50,7 +53,7 @@ public class GeneticAlgorithm {
         System.out.println("\nSolution found in generation " + generationCount);
         System.out.println("Fitness: "+population.getFittest().fitness);
         System.out.print("Genes: ");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.print(population.getFittest().genes[i]);
         }
 
@@ -60,7 +63,8 @@ public class GeneticAlgorithm {
     }
     
 	//Selection
-    void selection() {
+    @Override
+    public void selection() {
 
         //Select the most fittest individual
         fittest = population.getFittest();
@@ -70,7 +74,8 @@ public class GeneticAlgorithm {
     }
 
     //Crossover
-    void crossover() {
+    @Override
+    public void crossover() {
         Random rn = new Random();
 
         //Select a random crossover point
@@ -87,7 +92,8 @@ public class GeneticAlgorithm {
     }
 
     //Mutation
-    void mutation() {
+    @Override
+    public void mutation() {
         Random rn = new Random();
 
         //Select a random mutation point
