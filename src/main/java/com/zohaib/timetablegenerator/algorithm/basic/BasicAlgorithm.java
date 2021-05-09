@@ -12,7 +12,7 @@ public class BasicAlgorithm {
 	BasicIndividual fittest;
 	BasicIndividual secondFittest;
     int generationCount = 0;
-    
+    Data data;
   
     public void run(Data data){
         Random rn = new Random();
@@ -25,10 +25,10 @@ public class BasicAlgorithm {
         //Calculate fitness of each individual
         population.calculateFitness();
 
-        System.out.println("Generation: " + generationCount + " Fittest: " + population.fittest);
+        System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
 
         //While population gets an individual with maximum fitness
-        while (population.getFittest() < 499) {
+        while (generationCount < 20) {
             ++generationCount;
 
             //Do selection
@@ -38,7 +38,7 @@ public class BasicAlgorithm {
             crossover();
 
             //Do mutation under a random probability
-            if (rn.nextInt()%10 < 2) {
+            if (rn.nextInt()%10 < 3) {
                 mutation();
             }
 
@@ -48,14 +48,25 @@ public class BasicAlgorithm {
             //Calculate new fitness value
             population.calculateFitness();
 
-            System.out.println("Generation: " + generationCount + " Fittest: " + population.fittest);
+            System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
         }
 
         System.out.println("\nSolution found in generation " + generationCount);
-        System.out.println("Fitness: "+population.getFittestIndividual().get);
+        System.out.println("Fitness: "+population.getFittestIndividual().getFitnessValue());
         System.out.print("Genes: ");
         for (int i = 0; i < 500; i++) {
             System.out.print(population.getFittestIndividual().genes[i]);
+        }
+        
+        for (int i = 0; i < fittest.getGenes().length; i++) {
+        	
+        	for(int j = 0; j < fittest.getGenes().length; j++){
+        		System.out.print(fittest.getGenes()[i][j]);
+        		System.out.println("  ");
+        		
+        	}
+        	
+        	System.out.println(System.lineSeparator());
         }
 
         System.out.println("");
@@ -68,7 +79,7 @@ public class BasicAlgorithm {
     public void selection() {
 
         //Select the most fittest individual
-        fittest = population.getFittest();
+        fittest = population.getFittestIndividual();
 
         //Select the second most fittest individual
         secondFittest = population.getSecondFittest();
@@ -80,14 +91,16 @@ public class BasicAlgorithm {
         Random rn = new Random();
 
         //Select a random crossover point
-        int crossOverPoint = rn.nextInt(population.individuals[0].geneLength);
-
+        int crossOverPointX = rn.nextInt(population.individuals[0].genes.length);
+        int crossOverPointY = rn.nextInt(population.individuals[0].genes[0].length);
+        
         //Swap values among parents
-        for (int i = 0; i < crossOverPoint; i++) {
-            int temp = fittest.genes[i];
-            fittest.genes[i] = secondFittest.genes[i];
-            secondFittest.genes[i] = temp;
-
+        for (int i = 0; i < crossOverPointX; i++) {
+        	for (int j = 0; j < crossOverPointY; j++) {
+	            String temp = fittest.getGenes()[i][j];
+	            fittest.getGenes()[i][j] = secondFittest.getGenes()[i][j];
+	            secondFittest.getGenes()[i][j] = temp;
+        	}   
         }
 
     }
@@ -98,27 +111,28 @@ public class BasicAlgorithm {
         Random rn = new Random();
 
         //Select a random mutation point
-        int mutationPoint = rn.nextInt(population.individuals[0].geneLength);
+        int mutationPointX = rn.nextInt(population.individuals[0].genes.length);
+        int mutationPointY = rn.nextInt(population.individuals[0].genes[0].length);
 
         //Flip values at the mutation point
-        if (fittest.genes[mutationPoint] == 0) {
-            fittest.genes[mutationPoint] = 1;
-        } else {
-            fittest.genes[mutationPoint] = 0;
-        }
+        
+ 
+       	fittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt() % data.getCourses().size()).getCode();
 
-        mutationPoint = rn.nextInt(population.individuals[0].geneLength);
 
-        if (secondFittest.genes[mutationPoint] == 0) {
-            secondFittest.genes[mutationPoint] = 1;
-        } else {
-            secondFittest.genes[mutationPoint] = 0;
-        }
+        mutationPointX = rn.nextInt(population.individuals[0].genes.length);
+        mutationPointY = rn.nextInt(population.individuals[0].genes[0].length);
+
+
+        secondFittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt() % data.getCourses().size()).getCode();
+
+
+
     }
 
     //Get fittest offspring
-    Individual getFittestOffspring() {
-        if (fittest.fitness > secondFittest.fitness) {
+    BasicIndividual getFittestOffspring() {
+        if (fittest.getFitnessValue() > secondFittest.getFitnessValue()) {
             return fittest;
         }
         return secondFittest;

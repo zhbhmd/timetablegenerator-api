@@ -6,7 +6,7 @@ import com.zohaib.timetablegenerator.algorithm.basic.model.Data;
 public class BasicPopulation {
 
     BasicIndividual[] individuals = new BasicIndividual[10];
-    int fittest = 0;
+    int fittestValue  = 0;
 
     //Initialize population
     public void initializePopulation(int size, Data data) {
@@ -17,8 +17,8 @@ public class BasicPopulation {
 
     
     
-    public int getFittest() {
-		return fittest;
+    public int getFittestValue() {
+		return fittestValue;
 	}
 
 
@@ -28,12 +28,12 @@ public class BasicPopulation {
         int maxFit = Integer.MIN_VALUE;
         int maxFitIndex = 0;
         for (int i = 0; i < individuals.length; i++) {
-            if (maxFit <= individuals[i].fitness) {
-                maxFit = individuals[i].fitness;
+            if (maxFit <= individuals[i].getFitnessValue()) {
+                maxFit = individuals[i].getFitnessValue();
                 maxFitIndex = i;
             }
         }
-        fittest = individuals[maxFitIndex].fitness;
+        fittestValue = individuals[maxFitIndex].getFitnessValue();
         return individuals[maxFitIndex];
     }
 
@@ -42,10 +42,10 @@ public class BasicPopulation {
         int maxFit1 = 0;
         int maxFit2 = 0;
         for (int i = 0; i < individuals.length; i++) {
-            if (individuals[i].fitness > individuals[maxFit1].fitness) {
+            if (individuals[i].getFitnessValue() > individuals[maxFit1].getFitnessValue()) {
                 maxFit2 = maxFit1;
                 maxFit1 = i;
-            } else if (individuals[i].fitness > individuals[maxFit2].fitness) {
+            } else if (individuals[i].getFitnessValue() > individuals[maxFit2].getFitnessValue()) {
                 maxFit2 = i;
             }
         }
@@ -57,8 +57,8 @@ public class BasicPopulation {
         int minFitVal = Integer.MAX_VALUE;
         int minFitIndex = 0;
         for (int i = 0; i < individuals.length; i++) {
-            if (minFitVal >= individuals[i].fitness) {
-                minFitVal = individuals[i].fitness;
+            if (minFitVal >= individuals[i].getFitnessValue()) {
+                minFitVal = individuals[i].getFitnessValue();
                 minFitIndex = i;
             }
         }
@@ -71,6 +71,7 @@ public class BasicPopulation {
         for (int i = 0; i < individuals.length; i++) {
             individuals[i].calcFitness();
         }
-        getFittest();
+        
+        getFittestValue();
     }
 }

@@ -6,7 +6,7 @@ import com.zohaib.timetablegenerator.algorithm.basic.model.Data;
 
 public class BasicIndividual {
 	
-	int fitness = 0;
+	int fitnessValue = 0;
     String[][] genes;
 
     
@@ -26,19 +26,13 @@ public class BasicIndividual {
         	}
         }
 
-        fitness = 0;
+        fitnessValue = 0;
     }
 
 
 
-    public int getFitness() {
-		return fitness;
-	}
-
-
-
-	public void setFitness(int fitness) {
-		this.fitness = fitness;
+    public int getFitnessValue() {
+		return fitnessValue;
 	}
 
 
@@ -58,7 +52,9 @@ public class BasicIndividual {
 	//Calculate fitness
     public void calcFitness() {
 
-        fitness = 0;
+    	fitnessValue = 0;
 
     }
+    
+    
 }
