@@ -6,7 +6,7 @@ import com.zohaib.timetablegenerator.algorithm.basic.model.Data;
 public class BasicPopulation {
 
     BasicIndividual[] individuals = new BasicIndividual[10];
-    int fittestValue  = 0;
+    double fittestValue  = 0;
 
     //Initialize population
     public void initializePopulation(int size, Data data) {
@@ -17,7 +17,7 @@ public class BasicPopulation {
 
     
     
-    public int getFittestValue() {
+    public double getFittestValue() {
 		return fittestValue;
 	}
 
@@ -25,8 +25,8 @@ public class BasicPopulation {
 
 	//Get the fittest individual
     public BasicIndividual getFittestIndividual() {
-        int maxFit = Integer.MIN_VALUE;
-        int maxFitIndex = 0;
+    	double maxFit = Integer.MIN_VALUE;
+    	int maxFitIndex = 0;
         for (int i = 0; i < individuals.length; i++) {
             if (maxFit <= individuals[i].getFitnessValue()) {
                 maxFit = individuals[i].getFitnessValue();
@@ -54,7 +54,7 @@ public class BasicPopulation {
 
     //Get index of least fittest individual
     public int getLeastFittestIndex() {
-        int minFitVal = Integer.MAX_VALUE;
+    	double minFitVal = Integer.MAX_VALUE;
         int minFitIndex = 0;
         for (int i = 0; i < individuals.length; i++) {
             if (minFitVal >= individuals[i].getFitnessValue()) {
@@ -66,10 +66,10 @@ public class BasicPopulation {
     }
 
     //Calculate fitness of each individual
-    public void calculateFitness() {
+    public void calculateFitness(Data data) {
 
         for (int i = 0; i < individuals.length; i++) {
-            individuals[i].calcFitness();
+            individuals[i].calcFitness(data);
         }
         
         getFittestValue();

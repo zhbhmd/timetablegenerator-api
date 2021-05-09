@@ -17,7 +17,7 @@ public class AlgorithmController {
 	
 	@GetMapping("/algorithm")
 	void runAlgorithm() {
-		algorithmService.runAlgorithm();
+		//algorithmService.runAlgorithm();
 	}
 	
 	

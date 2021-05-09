@@ -6,15 +6,21 @@ import com.zohaib.timetablegenerator.algorithm.BaseGeneticAlgorithm;
 import com.zohaib.timetablegenerator.algorithm.basic.model.Data;
 import com.zohaib.timetablegenerator.algorithm.onesandzeros.Individual;
 
-public class BasicAlgorithm {
+public class BasicAlgorithm implements BaseGeneticAlgorithm{
 	
 	BasicPopulation population = new BasicPopulation();
 	BasicIndividual fittest;
 	BasicIndividual secondFittest;
     int generationCount = 0;
     Data data;
+    
+    
+    public BasicAlgorithm(Data data) {
+    	this.data = data;
+    }
+    
   
-    public void run(Data data){
+    public void run(){
         Random rn = new Random();
 
         
@@ -23,12 +29,12 @@ public class BasicAlgorithm {
         population.initializePopulation(10,data);
 
         //Calculate fitness of each individual
-        population.calculateFitness();
+        population.calculateFitness(data);
 
         System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
 
         //While population gets an individual with maximum fitness
-        while (generationCount < 20) {
+        while (generationCount > 10000) {
             ++generationCount;
 
             //Do selection
@@ -38,7 +44,7 @@ public class BasicAlgorithm {
             crossover();
 
             //Do mutation under a random probability
-            if (rn.nextInt()%10 < 3) {
+            if (rn.nextInt(10) < 3) {
                 mutation();
             }
 
@@ -46,30 +52,28 @@ public class BasicAlgorithm {
             addFittestOffspring();
 
             //Calculate new fitness value
-            population.calculateFitness();
+            population.calculateFitness(data);
 
             System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
         }
 
         System.out.println("\nSolution found in generation " + generationCount);
         System.out.println("Fitness: "+population.getFittestIndividual().getFitnessValue());
-        System.out.print("Genes: ");
-        for (int i = 0; i < 500; i++) {
-            System.out.print(population.getFittestIndividual().genes[i]);
-        }
-        
+        System.out.println("Genes: ");
+
+
         for (int i = 0; i < fittest.getGenes().length; i++) {
-        	
-        	for(int j = 0; j < fittest.getGenes().length; j++){
+        	System.out.print(data.getSlots().get(i).getTime() + " : ");
+        	for(int j = 0; j < fittest.getGenes()[i].length; j++){
         		System.out.print(fittest.getGenes()[i][j]);
-        		System.out.println("  ");
+        		System.out.print("--");
         		
         	}
-        	
-        	System.out.println(System.lineSeparator());
+        	System.out.print(System.lineSeparator());
+        
         }
 
-        System.out.println("");
+      
 
     
     }
@@ -117,14 +121,14 @@ public class BasicAlgorithm {
         //Flip values at the mutation point
         
  
-       	fittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt() % data.getCourses().size()).getCode();
+       	fittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt(data.getCourses().size())).getCode();
 
 
         mutationPointX = rn.nextInt(population.individuals[0].genes.length);
         mutationPointY = rn.nextInt(population.individuals[0].genes[0].length);
 
 
-        secondFittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt() % data.getCourses().size()).getCode();
+        secondFittest.getGenes()[mutationPointX][mutationPointY] = data.getCourses().get(rn.nextInt(data.getCourses().size())).getCode();
 
 
 
@@ -143,8 +147,8 @@ public class BasicAlgorithm {
     void addFittestOffspring() {
 
         //Update fitness values of offspring
-        fittest.calcFitness();
-        secondFittest.calcFitness();
+        fittest.calcFitness(data);
+        secondFittest.calcFitness(data);
 
         //Get index of least fit individual
         int leastFittestIndex = population.getLeastFittestIndex();

@@ -37,6 +37,12 @@
 		}
 	],
 	"courses": [
+			{
+			"code": "C0",
+			"name": "Empty",
+			"teacher": "T0",
+			"studentGroups": []
+		},
 		{
 			"code": "C1",
 			"name": "Maths",
