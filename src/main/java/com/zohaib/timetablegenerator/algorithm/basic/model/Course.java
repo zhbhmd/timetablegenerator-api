@@ -6,6 +6,7 @@ public class Course {
 	String code;
 	String name;
 	String teacher;
+	int sessionCount;
 	List<String> studentGroups;
 	
 	public String getCode() {
@@ -31,6 +32,12 @@ public class Course {
 	}
 	public void setStudentGroups(List<String> studentGroups) {
 		this.studentGroups = studentGroups;
+	}
+	public int getSessionCount() {
+		return sessionCount;
+	}
+	public void setSessionCount(int sessionCount) {
+		this.sessionCount = sessionCount;
 	}
 
 }

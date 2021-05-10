@@ -34,7 +34,7 @@ public class BasicAlgorithm implements BaseGeneticAlgorithm{
         System.out.println("Generation: " + generationCount + " Fittest: " + population.getFittestValue());
 
         //While population gets an individual with maximum fitness
-        while (generationCount > 10000) {
+        while (population.getFittestValue() < 1) {
             ++generationCount;
 
             //Do selection
@@ -58,7 +58,7 @@ public class BasicAlgorithm implements BaseGeneticAlgorithm{
         }
 
         System.out.println("\nSolution found in generation " + generationCount);
-        System.out.println("Fitness: "+population.getFittestIndividual().getFitnessValue());
+        System.out.println("Fitness: "+population.getFittestValue());
         System.out.println("Genes: ");
 
 

@@ -2,6 +2,8 @@ package com.zohaib.timetablegenerator.algorithm.basic;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import com.zohaib.timetablegenerator.algorithm.basic.model.Course;
@@ -55,20 +57,54 @@ public class BasicIndividual {
 	//Calculate fitness
     public void calcFitness(Data data) {
 
+    	Map<String, Integer> sessionCountMap = new HashMap<String,Integer>();
+    	fitnessValue = 0;
+    	
+    	
         for (int i = 0; i < genes.length; i++) {       	
         	for(int j = 0; j < genes[i].length; j++){       		
             	for(int k = 0; k < genes[i].length; k++){
             		if(k != j)
-            			compareChromosome(data,genes[i][j],genes[i][k]);
+            			detectConflicts(data,genes[i][j],genes[i][k]);
             		
-            	}       		
+            	}
+            	
+            	//tallyCount(sessionCountMap,genes[i][j]);
         	}
         }
 
-        fitnessValue = 1/fitnessValue;
+
+        //checkCount(data,sessionCountMap);
+        
+        if(fitnessValue == 0)
+        {
+            fitnessValue = 1;	
+        }
+        else {
+        	fitnessValue = 1-(fitnessValue/(data.getRooms().size()*data.getSlots().size()));	
+        }
+
     }
     
-    private void compareChromosome(Data data, String courseCode, String otherCourseCode) {
+    private void tallyCount(Map<String, Integer> sessionCountMap, String courseCode) {
+    	sessionCountMap.put(courseCode, sessionCountMap.getOrDefault(courseCode, 0) + 1);
+    	System.out.println("CourseCode: " +courseCode + ", Count: " +sessionCountMap.get(courseCode) );
+    }
+    
+    private void checkCount(Data data, Map<String, Integer> sessionCountMap) {
+
+    	sessionCountMap.remove("C0");
+    		
+		sessionCountMap.forEach(
+	              (k, v) -> {
+	            	  Course course = data.getCourses().stream().filter(c -> c.getCode().equalsIgnoreCase(k)).findFirst().get();
+	            	  if(course.getSessionCount() != v)
+	            		  fitnessValue++;
+	              }
+	          );
+    }
+    
+    private void detectConflicts(Data data, String courseCode, String otherCourseCode) {
     	Course course = data.getCourses().stream().filter(c -> c.getCode().equalsIgnoreCase(courseCode)).findFirst().get();
     	Course otherCourse = data.getCourses().stream().filter(c -> c.getCode().equalsIgnoreCase(otherCourseCode)).findFirst().get();
     	

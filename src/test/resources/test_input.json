@@ -39,13 +39,15 @@
 	"courses": [
 			{
 			"code": "C0",
-			"name": "Empty",
+			"name": "Free",
+			"sessionCount" :null,
 			"teacher": "T0",
 			"studentGroups": []
 		},
 		{
 			"code": "C1",
 			"name": "Maths",
+			"sessionCount" : "3",
 			"teacher": "T1",
 			"studentGroups": [
 				"S1",
@@ -55,6 +57,7 @@
 		{
 			"code": "C2",
 			"name": "Programming",
+			"sessionCount" : "3",
 			"teacher": "T2",
 			"studentGroups": [
 				"S1",
@@ -64,6 +67,7 @@
 		{
 			"code": "C3",
 			"name": "English",
+			"sessionCount" : "2",
 			"teacher": "T3",
 			"studentGroups": [
 				"S1",
